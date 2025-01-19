@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useNavigate } from "react-router-dom";
 
 function GetStartedSection() {
+  const navigate = useNavigate();
   return (
     <>
       <div
@@ -15,7 +17,11 @@ function GetStartedSection() {
       >
         <div className="col-md-6">
           <h1>Let your future travel plan begin here!</h1>
-          <button class="btn btn-outline-dark m-2" type="button">
+          <button
+            class="btn btn-outline-dark m-2"
+            type="button"
+            onClick={() => navigate("/step1")}
+          >
             Get Started!
           </button>
         </div>
