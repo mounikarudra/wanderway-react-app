@@ -8,6 +8,7 @@ import "./App.css";
 // pages
 import Step1 from "./components/pages/Step1";
 import Step2 from "./components/pages/Step2";
+import CollectInfo from "./components/pages/CollectInfo";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route exact path="/" element={<GetStartedSection />} />
           <Route path="/step1" element={<Step1 />} />
           <Route path="/step2" element={<Step2 />} />
+          <Route path="/collect-info" element={<CollectInfo />} />
         </Routes>
         <Footer />
       </div>
