@@ -20,7 +20,8 @@ function GetStartedSection() {
           <button
             class="btn btn-outline-dark m-2"
             type="button"
-            onClick={() => navigate("/step1")}
+            // onClick={() => navigate("/step1")}
+            onClick={() => navigate("/collect-info")}
           >
             Get Started!
           </button>

@@ -11,7 +11,7 @@ function Step1() {
         <button
           class="btn btn-outline-dark m-2"
           type="button"
-          onClick={() => navigate("/collect-info")}
+          onClick={() => navigate("/step2")}
         >
           Yes
         </button>

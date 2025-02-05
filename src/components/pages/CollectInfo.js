@@ -2,8 +2,10 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "../../App.css";
+import { useNavigate } from "react-router-dom";
 
 const CollectInfo = () => {
+  const navigate = useNavigate();
   return (
     <div className="d-flex justify-content-center align-items-center vh-100">
       <div className="container-fluid px-2 py-5 mx-auto">
@@ -86,7 +88,11 @@ const CollectInfo = () => {
                     <option>Scenic Drives</option>
                   </select>
                 </div>
-                <button type="submit" className="btn btn-primary">
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  onClick={() => navigate("/step1")}
+                >
                   Submit
                 </button>
               </form>
