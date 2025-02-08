@@ -1,13 +1,23 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function Step2() {
+  const navigate = useNavigate();
   return (
     <div className="row justify-content-center align-items-center vh-100">
       <div className="col-md-6">
-        <button class="btn btn-outline-dark m-2" type="button">
+        <button
+          class="btn btn-outline-dark m-2"
+          type="button"
+          onClick={() => navigate("/roadtrip-info")}
+        >
           Road Trip
         </button>
-        <button class="btn btn-outline-dark m-2" type="button">
+        <button
+          class="btn btn-outline-dark m-2"
+          type="button"
+          onClick={() => navigate("/redirect-page")}
+        >
           Flying
         </button>
       </div>

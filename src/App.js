@@ -9,6 +9,8 @@ import "./App.css";
 import Step1 from "./components/pages/Step1";
 import Step2 from "./components/pages/Step2";
 import CollectInfo from "./components/pages/CollectInfo";
+import RoadtripInfo from "./components/pages/RoadtripInfo";
+import RedirectPage from "./components/pages/RedirectPage";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
           <Route path="/step1" element={<Step1 />} />
           <Route path="/step2" element={<Step2 />} />
           <Route path="/collect-info" element={<CollectInfo />} />
+          <Route path="/roadtrip-info" element={<RoadtripInfo />} />
+          <Route path="/redirect-page" element={<RedirectPage />} />
         </Routes>
         <Footer />
       </div>
