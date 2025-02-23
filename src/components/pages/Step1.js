@@ -9,14 +9,14 @@ function Step1() {
       <div className="col-md-6">
         <h1>Did you already decide on a place?</h1>
         <button
-          class="btn btn-outline-dark m-2"
+          className="btn btn-outline-dark m-2"
           type="button"
           onClick={() => navigate("/step2")}
         >
           Yes
         </button>
         <button
-          class="btn btn-outline-dark m-2"
+          className="btn btn-outline-dark m-2"
           type="button"
           onClick={() => navigate("/step2")}
         >

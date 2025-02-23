@@ -18,7 +18,7 @@ function GetStartedSection() {
         <div className="col-md-6">
           <h1>Let your future travel plan begin here!</h1>
           <button
-            class="btn btn-outline-dark m-2"
+            className="btn btn-outline-dark m-2"
             type="button"
             // onClick={() => navigate("/step1")}
             onClick={() => navigate("/collect-info")}

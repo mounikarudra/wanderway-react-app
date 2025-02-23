@@ -7,14 +7,14 @@ function Step2() {
     <div className="row justify-content-center align-items-center vh-100">
       <div className="col-md-6">
         <button
-          class="btn btn-outline-dark m-2"
+          className="btn btn-outline-dark m-2"
           type="button"
           onClick={() => navigate("/roadtrip-info")}
         >
           Road Trip
         </button>
         <button
-          class="btn btn-outline-dark m-2"
+          className="btn btn-outline-dark m-2"
           type="button"
           onClick={() => navigate("/redirect-page")}
         >
