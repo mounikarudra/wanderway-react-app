@@ -7,36 +7,6 @@ const Itinerary = () => {
 
   console.log("itineraryData: " + itineraryData);
 
-  //     const jsonString = `{
-  //     "Day 1": [
-  //       {
-  //         "place_to_visit": "Pioneer Park",
-  //         "description_and_highlights": "Explore a historical village showcasing Alaska's past, visit the Gold Rush Town for a glimpse into the early days of Fairbanks, enjoy a ride on the Riverboat Discovery.",
-  //         "approximate_time_to_visit_the_place": "3-4 hours",
-  //         "useful_tips": "Consider buying the Riverboat Discovery tickets in advance to secure a spot.",
-  //         "entry_fee_if_any": "Free admission to the park, Riverboat Discovery tickets additional cost."
-  //       }
-  //     ],
-  //     "Day 2": [
-  //       {
-  //         "place_to_visit": "University of Alaska Museum of the North",
-  //         "description_and_highlights": "Discover natural and cultural history of Alaska, view exhibits on wildlife, art, and the people of the North.",
-  //         "approximate_time_to_visit_the_place": "2-3 hours",
-  //         "useful_tips": "Check the museum's schedule for guided tours or special events.",
-  //         "entry_fee_if_any": "Low-cost admission, discounts for students and seniors."
-  //       },
-  //       {
-  //         "place_to_visit": "Creamer's Field Migratory Waterfowl Refuge",
-  //         "description_and_highlights": "Experience bird watching and nature walks in a serene refuge, ideal for outdoor enthusiasts and photography lovers.",
-  //         "approximate_time_to_visit_the_place": "1-2 hours",
-  //         "useful_tips": "Bring binoculars for bird watching, wear suitable footwear for walking trails.",
-  //         "entry_fee_if_any": "Free admission to the refuge."
-  //       }
-  //     ]
-  //   }`;
-
-  //   const itineraryData = JSON.parse(jsonString);
-
   // Get all day keys sorted (e.g., "Day 1", "Day 2", ...)
   const dayKeys = Object.keys(itineraryData || {}).sort((a, b) => {
     const dayA = parseInt(a.replace(/\D/g, ""), 10);
