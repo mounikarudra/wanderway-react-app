@@ -11,6 +11,7 @@ import Step2 from "./components/pages/Step2";
 import CollectInfo from "./components/pages/CollectInfo";
 import RoadtripInfo from "./components/pages/RoadtripInfo";
 import RedirectPage from "./components/pages/RedirectPage";
+import Itinerary from "./components/pages/Itinerary";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/collect-info" element={<CollectInfo />} />
           <Route path="/roadtrip-info" element={<RoadtripInfo />} />
           <Route path="/redirect-page" element={<RedirectPage />} />
+          <Route path="/itinerary-page" element={<Itinerary />} />
         </Routes>
         <Footer />
       </div>

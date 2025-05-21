@@ -60,7 +60,7 @@ async function getitinerary(
   // console.log(completion.choices);
   console.log(completion.choices[0].message.content);
 
-  prepJson(completion.choices[0].message.content);
+  // prepJson(completion.choices[0].message.content);
   return completion.choices[0].message.content;
 }
 
