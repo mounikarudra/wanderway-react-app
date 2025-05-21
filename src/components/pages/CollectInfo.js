@@ -1,100 +1,211 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min";
-import "../../App.css";
+import { useNavigate } from "react-router-dom";
+import { getitinerary } from "../../openAIPrompt";
+import {
+  Container,
+  Box,
+  Card,
+  CardContent,
+  Typography,
+  TextField,
+  MenuItem,
+  Select,
+  InputLabel,
+  FormControl,
+  Button,
+  OutlinedInput,
+  Chip,
+  Checkbox,
+  ListItemText,
+} from "@mui/material";
+
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+const placeTypes = [
+  "Must see places",
+  "Hiking",
+  "Adventure activies",
+  "Wildlife",
+  "Scenic Drives",
+];
 
 const CollectInfo = () => {
+  const navigate = useNavigate();
+  const [form, setForm] = React.useState({
+    placeInput: "",
+    tripStartDate: "",
+    travelerType: "Single",
+    noOfDaysType: "",
+    budgetType: "Low",
+    placesType: [],
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handlePlacesTypeChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setForm((prev) => ({
+      ...prev,
+      placesType: typeof value === "string" ? value.split(",") : value,
+    }));
+  };
+
+  async function handleInfo(event) {
+    event.preventDefault();
+
+    const {
+      placeInput,
+      tripStartDate,
+      travelerType,
+      noOfDaysType,
+      budgetType,
+      placesType,
+    } = form;
+
+    const itineraryData = await getitinerary(
+      travelerType,
+      placeInput,
+      budgetType,
+      placesType.join(","),
+      months[parseInt(tripStartDate.substr(5, 2), 10) - 1],
+      noOfDaysType
+    );
+
+    navigate("/itinerary-page", { state: itineraryData });
+  }
+
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100">
-      <div className="container-fluid px-2 py-5 mx-auto">
-        <div className="row d-flex">
-          <div className="col-xl-7 col-lg-8 col-md-9 col-11">
-            <h3 className="text-center">Answer some questions</h3>
-            <p className="blue-text text-center">
-              Just answer a few questions
-              <br /> so that we can personalize the right trip itinerary for
-              you.
-            </p>
-            <div className="card">
-              <form>
-                <p className="text-center">
-                  <label className="red-label">*</label> indicated required
-                  fields
-                </p>
-                <div className="form-group">
-                  <label htmlFor="placeInput" className="text-left">
-                    <label className="red-label">*</label> Place
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="placeInput"
-                    aria-describedby="Name of the Place"
-                    placeholder="Enter place name"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="tripStartDate" className="text-right">
-                    <label className="red-label">*</label> Date
-                  </label>
-                  <input
-                    type="date"
-                    className="form-control"
-                    id="tripStartDate"
-                    placeholder="" // TODO - Get the current date and grey-out past dates
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="travelerType">
-                    <label className="red-label">*</label> Traveler Type
-                  </label>
-                  <select className="form-control" id="travelerType">
-                    <option>Single</option>
-                    <option>Family</option>
-                    <option>Friends</option>
-                  </select>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="noOfDaysType">
-                    <label className="red-label">*</label> No. of Days
-                  </label>
-                  <select className="form-control" id="noOfDaysType">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                  </select>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="budgetType">
-                    <label className="red-label">*</label> Budget
-                  </label>
-                  <select className="form-control" id="budgetType">
-                    <option>Low</option>
-                    <option>Medium</option>
-                    <option>High</option>
-                  </select>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="placesType">
-                    <label className="red-label">*</label> Types of Places
-                  </label>
-                  <select className="form-control" id="placesType">
-                    <option>Must see places</option>
-                    <option>Hiking</option>
-                    <option>Adventure activies</option>
-                    <option>Wildlife</option>
-                    <option>Scenic Drives</option>
-                  </select>
-                </div>
-                <button type="submit" className="btn btn-primary">
-                  Submit
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Container maxWidth="sm" sx={{ mt: 6 }}>
+      <Card elevation={6}>
+        <CardContent>
+          <Typography variant="h4" align="center" color="primary" gutterBottom>
+            Answer some questions
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            align="center"
+            color="text.secondary"
+            gutterBottom
+          >
+            Just answer a few questions so that we can personalize the right
+            trip itinerary for you.
+          </Typography>
+          <Box component="form" onSubmit={handleInfo} sx={{ mt: 3 }}>
+            <FormControl fullWidth margin="normal">
+              <TextField
+                required
+                label="Place"
+                name="placeInput"
+                value={form.placeInput}
+                onChange={handleChange}
+                placeholder="Enter place name"
+              />
+            </FormControl>
+            <FormControl fullWidth margin="normal">
+              <TextField
+                required
+                label="Date"
+                name="tripStartDate"
+                type="date"
+                value={form.tripStartDate}
+                onChange={handleChange}
+                InputLabelProps={{ shrink: true }}
+              />
+            </FormControl>
+            <FormControl fullWidth margin="normal">
+              <InputLabel id="travelerType-label">Traveler Type *</InputLabel>
+              <Select
+                labelId="travelerType-label"
+                name="travelerType"
+                value={form.travelerType}
+                label="Traveler Type *"
+                onChange={handleChange}
+              >
+                <MenuItem value="Single">Single</MenuItem>
+                <MenuItem value="Family">Family</MenuItem>
+                <MenuItem value="Friends">Friends</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl fullWidth margin="normal">
+              <TextField
+                required
+                label="No. of Days"
+                name="noOfDaysType"
+                type="number"
+                value={form.noOfDaysType}
+                onChange={handleChange}
+                inputProps={{ min: 1 }}
+              />
+            </FormControl>
+            <FormControl fullWidth margin="normal">
+              <InputLabel id="budgetType-label">Budget *</InputLabel>
+              <Select
+                labelId="budgetType-label"
+                name="budgetType"
+                value={form.budgetType}
+                label="Budget *"
+                onChange={handleChange}
+              >
+                <MenuItem value="Low">Low</MenuItem>
+                <MenuItem value="Medium">Medium</MenuItem>
+                <MenuItem value="High">High</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl fullWidth margin="normal">
+              <InputLabel id="placesType-label">Types of Places *</InputLabel>
+              <Select
+                labelId="placesType-label"
+                multiple
+                name="placesType"
+                value={form.placesType}
+                onChange={handlePlacesTypeChange}
+                input={<OutlinedInput label="Types of Places *" />}
+                renderValue={(selected) => (
+                  <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                    {selected.map((value) => (
+                      <Chip key={value} label={value} />
+                    ))}
+                  </Box>
+                )}
+              >
+                {placeTypes.map((type) => (
+                  <MenuItem key={type} value={type}>
+                    <Checkbox checked={form.placesType.indexOf(type) > -1} />
+                    <ListItemText primary={type} />
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <Box sx={{ mt: 3, textAlign: "center" }}>
+              <Button type="submit" variant="contained" size="large">
+                Submit
+              </Button>
+            </Box>
+          </Box>
+        </CardContent>
+      </Card>
+    </Container>
   );
 };
 
