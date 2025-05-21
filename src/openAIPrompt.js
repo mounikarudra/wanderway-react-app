@@ -13,6 +13,8 @@ async function getitinerary(
   // const [message, setMessage] = useState("");
   // const [response, setResponse] = useState("");
 
+  console.log("Traveler:", traveler);
+
   const sendMessage = async () => {
     const res = await fetch("/api/openai", {
       method: "POST",
@@ -28,6 +30,8 @@ async function getitinerary(
     });
 
     const data = await res.json();
+
+    console.log("Response from server:", data);
     // setResponse(data.reply);
     return data.reply;
   };
