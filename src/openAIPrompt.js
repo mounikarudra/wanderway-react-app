@@ -1,7 +1,6 @@
 // This module now calls your Vercel serverless function instead of OpenAI directly from the browser.
 // Your OpenAI API key should NOT be in this file or in your React app.
 
-// import { useState } from "react";
 async function getitinerary(
   traveler,
   place,
@@ -10,11 +9,7 @@ async function getitinerary(
   month,
   days
 ) {
-  // const [message, setMessage] = useState("");
-  // const [response, setResponse] = useState("");
-
   console.log("Traveler:", traveler);
-
   const sendMessage = async () => {
     const res = await fetch("/api/openai", {
       method: "POST",
@@ -28,11 +23,12 @@ async function getitinerary(
         days,
       }),
     });
-
+    if (!res.ok) {
+      throw new Error("Failed to fetch data from server");
+    }
     const data = await res.json();
 
     console.log("Response from server:", data);
-    // setResponse(data.reply);
     return data.reply;
   };
 }
