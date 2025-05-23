@@ -75,6 +75,8 @@ const openai = new OpenAI({
   apiKey: process.env.REACT_APP_OPENAI_API_KEY, // This is also the default, can be omitted
 });
 
+console.log("Inside openai.js");
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
